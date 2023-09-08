@@ -22,6 +22,8 @@ Route::get('/', [DashboardController::class, 'index'] )->name('dashboard');
 
 Route::post('/ideas', [IdeasController::class, 'store'] )->name('ideas.create');
 
+Route::delete('/ideas/{id}', [IdeasController::class, 'destroy'] )->name('ideas.destroy');
+
 Route::get('/terms', function () {
     return view('terms');
 });

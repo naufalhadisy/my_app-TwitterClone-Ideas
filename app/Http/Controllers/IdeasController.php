@@ -22,4 +22,10 @@ class IdeasController extends Controller
 
         return redirect()->route('dashboard')->with('success', 'Idea created successfully !');
     }
+
+    public function destroy($id){
+        $ideas = ideas::where('id', $id)->delete();
+
+        return redirect()->route('dashboard')->with('success', 'Idea deleted successfully !');
+    }
 }
