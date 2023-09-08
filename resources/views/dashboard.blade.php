@@ -39,7 +39,7 @@
         </div>
     </div>
     <div class="col-6">
-        {{-- add submit msg underneath this later --}}
+        @include('shared.success_msg')
         @include('shared.submit_ideas')
         <hr>
         @foreach ($ideas as $idea)
