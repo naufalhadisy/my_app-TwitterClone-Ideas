@@ -7,6 +7,17 @@ use App\Models\ideas;
 
 class IdeasController extends Controller
 {
+    public function show (ideas $ideas){
+
+        return view('ideas.show', [
+            'idea' => $ideas
+
+            //'idea' instead 'ideas' becaus in the views there's no foreach $ideas = $idea
+            // only $idea. Hence we need to declare 'idea' here
+        ]);
+
+    }
+
     public function store(){
 
         request() -> validate([
@@ -23,8 +34,9 @@ class IdeasController extends Controller
         return redirect()->route('dashboard')->with('success', 'Idea created successfully !');
     }
 
-    public function destroy($id){
-        $ideas = ideas::where('id', $id)->delete();
+
+    public function destroy(ideas $ideas){ //the '$ideas' name should be the saame as in the route web.php
+        $ideas->delete();
 
         return redirect()->route('dashboard')->with('success', 'Idea deleted successfully !');
     }

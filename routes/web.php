@@ -22,7 +22,9 @@ Route::get('/', [DashboardController::class, 'index'] )->name('dashboard');
 
 Route::post('/ideas', [IdeasController::class, 'store'] )->name('ideas.create');
 
-Route::delete('/ideas/{id}', [IdeasController::class, 'destroy'] )->name('ideas.destroy');
+Route::delete('/ideas/{ideas}', [IdeasController::class, 'destroy'] )->name('ideas.destroy');
+
+Route::get('/ideas/{ideas}', [IdeasController::class, 'show'] )->name('ideas.show');
 
 Route::get('/terms', function () {
     return view('terms');
