@@ -8,10 +8,10 @@ use Illuminate\Http\Request;
 class DashboardController extends Controller
 {
     public function index(){
-        
+
         return view('dashboard', [
             // 'ideas' => ideas::all()
-            'ideas' => ideas::orderBy('created_at', 'DESC')->get()
+            'ideas' => ideas::orderBy('created_at', 'DESC')->paginate(5)
         ]);
     }
 }
