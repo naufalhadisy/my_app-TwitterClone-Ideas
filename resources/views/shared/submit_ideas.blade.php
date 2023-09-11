@@ -1,10 +1,10 @@
 <h4> Share yours ideas </h4>
 <div class="row">
-  <form action="{{ route('ideas.create') }}" method="post">
+  <form action="{{ route('ideas.store') }}" method="post">
     @csrf
     <div class="mb-3">
-        <textarea name="ideas" class="form-control" id="ideas" rows="3" ></textarea>
-        @error('ideas')
+        <textarea name="content" class="form-control" id="content" rows="3" ></textarea>
+        @error('content')
             <span class="d-block fs-6 mt-2 text-danger"> {{$message}} </span>
         @enderror
     </div>
