@@ -22,42 +22,32 @@ Route::get('/', [DashboardController::class, 'index'] );
 
 Route::get('/', [DashboardController::class, 'index'] )->name('dashboard');
 
-Route::post('/ideas', [IdeasController::class, 'store'] )->name('ideas.store');
 
-Route::get('/ideas/{ideas}', [IdeasController::class, 'show'] )->name('ideas.show');
+Route::group(['prefix'=>'ideas', 'as'=>'ideas.'], function(){
+    //add 'ideas' at start of route. ex: 'ideas/{ideas}'
+    //and add 'ideas.' at the start of the name. ex: 'ideas.sshow'
 
-Route::get('/ideas/{ideas}/edit', [IdeasController::class, 'edit'] )->name('ideas.edit')->middleware('auth');
+    Route::post('', [IdeasController::class, 'store'] )->name('store');
 
-Route::put('/ideas/{ideas}', [IdeasController::class, 'update'] )->name('ideas.update')->middleware('auth');
+    Route::get('/{ideas}', [IdeasController::class, 'show'] )->name('show');
 
-Route::delete('/ideas/{ideas}', [IdeasController::class, 'destroy'] )->name('ideas.destroy')->middleware('auth');
 
-Route::post('/ideas/{ideas}/comments', [CommentController::class, 'store'] )->name('ideas.comments.store')->middleware('auth');
+    Route::group(['middleware'=>'auth'], function(){
 
-// auth
-Route::get('/register', [AuthController::class, 'register'] )->name('register');
+        Route::get('/{ideas}/edit', [IdeasController::class, 'edit'] )->name('edit');
 
-Route::post('/register', [AuthController::class, 'store'] );
+        Route::put('/{ideas}', [IdeasController::class, 'update'] )->name('update');
 
-Route::get('/login', [AuthController::class, 'login'] )->name('login');
+        Route::delete('/{ideas}', [IdeasController::class, 'destroy'] )->name('destroy');
 
-Route::post('/login', [AuthController::class, 'authenticate'] );
+        Route::post('/{ideas}/comments', [CommentController::class, 'store'] )->name('comments.store');
 
-Route::post('/logout', [AuthController::class, 'logout'] )->name('logout');
-//endof auth
+    });
+
+});
+
 
 Route::get('/terms', function () {
     return view('terms');
 });
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-
-// Route::get('/feed', function () {
-//     return view('feed');
-// });
-
-// Route::get('/profile', function () {
-//     return view('user.profile');
-// });
