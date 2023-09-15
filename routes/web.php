@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\IdeasController;
 use App\Http\Controllers\ProfileController;
@@ -29,6 +30,8 @@ Route::get('/ideas/{ideas}', [IdeasController::class, 'show'] )->name('ideas.sho
 Route::get('/ideas/{ideas}/edit', [IdeasController::class, 'edit'] )->name('ideas.edit');
 
 Route::put('/ideas/{ideas}', [IdeasController::class, 'update'] )->name('ideas.update');
+
+Route::post('/ideas/{ideas}/comments', [CommentController::class, 'store'] )->name('ideas.comments.store');
 
 Route::get('/terms', function () {
     return view('terms');

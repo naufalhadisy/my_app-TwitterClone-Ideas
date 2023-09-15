@@ -6,9 +6,6 @@
     <div class="col-3">
         <div class="card overflow-hidden">
             @include('shared.left_sidebar')
-            <div class="card-footer text-center py-2">
-                <a class="btn btn-link btn-sm" href="#">View Profile </a>
-            </div>
         </div>
     </div>
     <div class="col-6">

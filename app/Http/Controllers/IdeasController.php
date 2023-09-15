@@ -9,12 +9,9 @@ class IdeasController extends Controller
 {
     public function show (ideas $ideas){
 
-        return view('ideas.show', [
-            'idea' => $ideas
+        // dd($ideas->comments);
 
-            //'idea' instead 'ideas' becaus in the views there's no foreach $ideas = $idea
-            // only $idea. Hence we need to declare 'idea' here
-        ]);
+        return view('ideas.show', ['idea' => $ideas]);
 
     }
 
