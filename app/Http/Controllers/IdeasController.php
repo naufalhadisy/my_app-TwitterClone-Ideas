@@ -21,12 +21,13 @@ class IdeasController extends Controller
             'content' => 'required|min:3|max:255|'
         ]);
 
-        //comment this if want to stop generating new data to db
-        $ideas = ideas::create(
-            [
-                'content' => request()->get('content', ''),
-            ]
-        );
+        // $ideas = ideas::create(
+        //     [
+        //         'content' => request()->get('content', ''),
+        //     ]
+        // );
+
+        $validated['user_id'] = auth()->id();
 
         $ideas = ideas::create($validated);
 
@@ -35,12 +36,21 @@ class IdeasController extends Controller
 
 
     public function destroy(ideas $ideas){ //the '$ideas' name should be the saame as in the route web.php
+
+        if(auth()->id() !== $ideas->user_id) {
+            abort(404);
+        }
+
         $ideas->delete();
 
         return redirect()->route('dashboard')->with('success', 'Idea deleted successfully !');
     }
 
     public function edit (ideas $ideas){
+
+        if(auth()->id() !== $ideas->user_id) {
+            abort(404);
+        }
 
         $editing = true;
 
@@ -49,6 +59,10 @@ class IdeasController extends Controller
     }
 
     public function update (ideas $ideas){
+
+        if(auth()->id() !== $ideas->user_id) {
+            abort(404);
+        }
 
         $validated = request() -> validate([
             'content' => 'required|min:3|max:255|'

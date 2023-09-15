@@ -24,15 +24,15 @@ Route::get('/', [DashboardController::class, 'index'] )->name('dashboard');
 
 Route::post('/ideas', [IdeasController::class, 'store'] )->name('ideas.store');
 
-Route::delete('/ideas/{ideas}', [IdeasController::class, 'destroy'] )->name('ideas.destroy');
-
 Route::get('/ideas/{ideas}', [IdeasController::class, 'show'] )->name('ideas.show');
 
-Route::get('/ideas/{ideas}/edit', [IdeasController::class, 'edit'] )->name('ideas.edit');
+Route::get('/ideas/{ideas}/edit', [IdeasController::class, 'edit'] )->name('ideas.edit')->middleware('auth');
 
-Route::put('/ideas/{ideas}', [IdeasController::class, 'update'] )->name('ideas.update');
+Route::put('/ideas/{ideas}', [IdeasController::class, 'update'] )->name('ideas.update')->middleware('auth');
 
-Route::post('/ideas/{ideas}/comments', [CommentController::class, 'store'] )->name('ideas.comments.store');
+Route::delete('/ideas/{ideas}', [IdeasController::class, 'destroy'] )->name('ideas.destroy')->middleware('auth');
+
+Route::post('/ideas/{ideas}/comments', [CommentController::class, 'store'] )->name('ideas.comments.store')->middleware('auth');
 
 // auth
 Route::get('/register', [AuthController::class, 'register'] )->name('register');
@@ -44,7 +44,6 @@ Route::get('/login', [AuthController::class, 'login'] )->name('login');
 Route::post('/login', [AuthController::class, 'authenticate'] );
 
 Route::post('/logout', [AuthController::class, 'logout'] )->name('logout');
-
 //endof auth
 
 Route::get('/terms', function () {

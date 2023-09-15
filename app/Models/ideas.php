@@ -11,11 +11,16 @@ class ideas extends Model
 
 
     protected $fillable = [
+        'user_id',
         'content',
         'likes',
     ];
 
     public function comments(){
         return $this->hasMany(Comment::class, 'idea_id', 'id');
+    }
+
+    public function user(){
+        return $this->belongsTo(User::class);
     }
 }
